@@ -15,14 +15,18 @@ defmodule LbSearchex.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {LbSearchex, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [:phoenix, :cowboy, :logger, :postalex, :dotenv, :jsx]]
   end
 
   # Specifies your project dependencies
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.7.2"},
-     {:cowboy, "~> 1.0"}]
+    [
+      {:phoenix, "~> 0.7.2"},
+      {:cowboy, "~> 1.0"},
+      {:exrm, "~> 0.14.16"},
+      {:postalex, path: "../postalex"}
+    ]
   end
 end

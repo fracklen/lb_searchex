@@ -6,6 +6,8 @@ defmodule LbSearchex do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    LbSearchex.Endpoint.start
+
     children = [
       # Define workers and child supervisors to be supervised
       # worker(LbSearchex.Worker, [arg1, arg2, arg3])
