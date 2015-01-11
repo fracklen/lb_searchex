@@ -10,20 +10,15 @@ defmodule LbSearchex.Mixfile do
      deps: deps]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
   def application do
     [mod: {LbSearchex, []},
-     applications: [:phoenix, :cowboy, :logger, :postalex, :dotenv, :jsx]]
+     applications: [:phoenix, :cowboy, :logger, :postalex, :dotenv, :jsx, :couchbeam]]
   end
 
-  # Specifies your project dependencies
-  #
-  # Type `mix help deps` for examples and options
   defp deps do
     [
       {:phoenix, "~> 0.7.2"},
+      {:poison, "~> 1.2", [optional: false, hex: :poison, override: true]},
       {:cowboy, "~> 1.0"},
       {:exrm, "~> 0.14.16"},
       {:postalex, github: "ringling/postalex"}

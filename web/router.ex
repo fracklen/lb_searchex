@@ -16,8 +16,20 @@ defmodule LbSearchex.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", LbSearchex do
-  #   pipe_through :api
-  # end
+  scope "/api/:country/:category", LbSearchex do
+    pipe_through :api
+
+    scope "/locations" do
+      get "/postal_district", LocationController, :postal_code
+      post "/postal_district", LocationController, :postal_code
+      get "/postal_code/neighbours", LocationController, :postal_code_neighbours
+    end
+
+    scope "/stats" do
+      get "/areas", AreaStatController, :index
+      get "/postal_districts", PostalDistrictStatController, :index
+      get "/postal_codes", PostalDistrictStatController, :postal_codes
+    end
+
+  end
 end
