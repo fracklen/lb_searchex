@@ -9,9 +9,15 @@ defmodule LbSearchex.LocationController do
     json allow_cors(conn), locations
   end
 
-  def postal_code(conn, params) do
+  def postal_district(conn, params) do
     {country, category, postal_districts, kinds} = parse_request(:postal_district, conn.method, fetch_body(conn), params)
     locations = LocationService.find(country, category, kinds, postal_districts)
+    json allow_cors(conn), locations
+  end
+
+  def district_by_code(conn, params) do
+    {country, category, postal_code, kinds} = parse_request(:postal_code, conn.method, fetch_body(conn), params)
+    locations = LocationService.district_locations_by_postal_code(country, category, kinds, postal_code)
     json allow_cors(conn), locations
   end
 
@@ -28,6 +34,10 @@ defmodule LbSearchex.LocationController do
 
   defp query(:bounding_box, request) do
     {request["country"], request["category"], bounding_box(request), kinds(request["kinds"])}
+  end
+
+  defp query(:postal_code, request) do
+    {request["country"], request["category"], request["postal_code"], kinds(request["kinds"])}
   end
 
   defp bounding_box(request) do

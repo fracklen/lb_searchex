@@ -21,8 +21,10 @@ defmodule LbSearchex.Router do
     pipe_through :api
 
     scope "/locations" do
-      get "/postal_district", LocationController, :postal_code
-      post "/postal_district", LocationController, :postal_code
+      get "/postal_district", LocationController, :postal_district
+      post "/postal_district", LocationController, :postal_district
+      get "/postal_codes/:postal_code/postal_district", LocationController, :district_by_code
+      post "/postal_codes/:postal_code/postal_district", LocationController, :district_by_code
       get "/bounding_box", LocationController, :bounding_box
       post "/bounding_box", LocationController, :bounding_box
     end
