@@ -3,22 +3,39 @@ defmodule LbSearchex.LocationController do
 
   plug :action
 
+  def bounding_box(conn, params) do
+    {country, category, bounding_box, kinds} = parse_request(:bounding_box, conn.method, fetch_body(conn), params)
+    locations = LocationService.by_bounding_box(country, category, kinds, bounding_box)
+    json allow_cors(conn), locations
+  end
+
   def postal_code(conn, params) do
-    request = parse_request(conn.method, fetch_body(conn), params)
-    {country, category, postal_districts, kinds} = parse_request(conn.method, fetch_body(conn), params)
-    IO.inspect parse_request(conn.method, fetch_body(conn), params)
+    {country, category, postal_districts, kinds} = parse_request(:postal_district, conn.method, fetch_body(conn), params)
     locations = LocationService.find(country, category, kinds, postal_districts)
     json allow_cors(conn), locations
   end
 
-  defp parse_request("POST", _body, params), do: query(params)
-  defp parse_request("GET","", params), do: query(params)
-  defp parse_request("GET", body, params) do
-    Map.merge(Poison.decode!(body), params) |> query
+  defp parse_request(req_type, "POST", _body, params), do: query(req_type, params)
+  defp parse_request(req_type, "GET","", params), do: query(req_type, params)
+  defp parse_request(req_type, "GET", body, params) do
+    request = Map.merge(Poison.decode!(body), params)
+    req_type |> query(request)
   end
 
-  defp query(request) do
+  defp query(:postal_district, request) do
     {request["country"], request["category"], request["postal_districts"], kinds(request["kinds"])}
+  end
+
+  defp query(:bounding_box, request) do
+    {request["country"], request["category"], bounding_box(request), kinds(request["kinds"])}
+  end
+
+  defp bounding_box(request) do
+    [ b_lt_lat, b_lt_lon, t_rt_lat, t_rt_lon ] = request["viewport"] |> String.split(~r{,})
+    %{
+      bottom_left: %{ lat: b_lt_lat, lon: b_lt_lon },
+      top_right: %{  lat: t_rt_lat, lon: t_rt_lon }
+    }
   end
 
   defp kinds(nil), do: default_kinds

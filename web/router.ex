@@ -23,7 +23,8 @@ defmodule LbSearchex.Router do
     scope "/locations" do
       get "/postal_district", LocationController, :postal_code
       post "/postal_district", LocationController, :postal_code
-      get "/postal_code/neighbours", LocationController, :postal_code_neighbours
+      get "/bounding_box", LocationController, :bounding_box
+      post "/bounding_box", LocationController, :bounding_box
     end
 
     scope "/stats" do
