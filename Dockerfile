@@ -3,6 +3,7 @@ MAINTAINER Martin Neiiendam mn@lokalebasen.dk
 ENV REFRESHED_AT 2015-01-08
 
 ENV MIX_ENV prod
+ENV ETCD_ENV lb_searchex
 
 WORKDIR /var/www/app
 
