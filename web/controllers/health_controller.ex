@@ -21,7 +21,7 @@ defmodule LbSearchex.HealthController do
     |> Map.put(:responses, responses)
   end
 
-  defp error_code(true, responses), do: %{ error: "ping errors", status: 400 }
+  defp error_code(true, responses), do: %{ error: "ping errors", status: 500 }
   defp error_code(false, responses), do: %{ ok: "all ok", status: 200 }
   defp errors?(responses), do: Enum.any?(responses, fn(x) -> error?(x) end)
   defp error?(%{error: _}), do: true

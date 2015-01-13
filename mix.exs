@@ -3,7 +3,7 @@ defmodule LbSearchex.Mixfile do
 
   def project do
     [app: :lb_searchex,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.0",
      elixirc_paths: ["lib", "web"],
      compilers: [:phoenix] ++ Mix.compilers,
@@ -21,7 +21,7 @@ defmodule LbSearchex.Mixfile do
       {:poison, "~> 1.2", [optional: false, hex: :poison, override: true]},
       {:cowboy, "~> 1.0"},
       {:exrm, "~> 0.14.16"},
-      {:postalex, github: "ringling/postalex"}
+      {:postalex, github: "ringling/postalex", tag: "v0.0.2"}
     ]
   end
 end
