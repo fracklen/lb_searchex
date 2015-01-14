@@ -27,6 +27,9 @@ defmodule LbSearchex.Router do
       post "/postal_codes/:postal_code/postal_district", LocationController, :district_by_code
       get "/bounding_box", LocationController, :bounding_box
       post "/bounding_box", LocationController, :bounding_box
+
+      get "/area_slug/:area_slug", LocationController, :area_slug
+      get "/postal_district_slug/:postal_district_slug", LocationController, :postal_district_slug
     end
 
     scope "/stats" do
