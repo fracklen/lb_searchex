@@ -3,6 +3,18 @@ defmodule LbSearchex.LocationController do
 
   plug :action
 
+    def area_slug(conn, params) do
+      {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
+      locations = LocationService.find_by_area_slug(country, category, kinds, params["area_slug"])
+      json allow_cors(conn), locations
+    end
+
+    def postal_district_slug(conn, params) do
+      {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
+      locations = LocationService.find_by_postal_district_slug(country, category, kinds, params["postal_district_slug"])
+      json allow_cors(conn), locations
+    end
+
   def bounding_box(conn, params) do
     {country, category, bounding_box, kinds} = parse_request(:bounding_box, conn.method, fetch_body(conn), params)
     locations = LocationService.by_bounding_box(country, category, kinds, bounding_box)
@@ -26,6 +38,10 @@ defmodule LbSearchex.LocationController do
   defp parse_request(req_type, "GET", body, params) do
     request = Map.merge(Poison.decode!(body), params)
     req_type |> query(request)
+  end
+
+  defp query(:default, request) do
+    {request["country"], request["category"], kinds(request["kinds"])}
   end
 
   defp query(:postal_district, request) do

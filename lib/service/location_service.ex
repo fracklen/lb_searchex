@@ -17,5 +17,14 @@ defmodule LocationService do
     Postalex.Server.district_locations(ctry_cat, kinds: kinds, postal_code: postal_code)
   end
 
+  def find_by_area_slug(country, category, kinds, area_slug) do
+    ctry_cat = %{ country: atomize(country), category: atomize(category) }
+    Postalex.Server.locations(ctry_cat, kinds: kinds, area_slug: area_slug)
+  end
+
+  def find_by_postal_district_slug(country, category, kinds, postal_district_slug) do
+    ctry_cat = %{ country: atomize(country), category: atomize(category) }
+    Postalex.Server.locations(ctry_cat, kinds: kinds, postal_district_slug: postal_district_slug)
+  end
 
 end

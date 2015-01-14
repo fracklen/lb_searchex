@@ -10,6 +10,9 @@ curl -XGET localhost:4000/api/dk/lease/locations/postal_district -d '{ "postal_d
 curl -XGET localhost:4000/api/dk/lease/locations/postal_district -d '{ "postal_districts":["2850"], "kinds":["warehouse"]}'
 curl -v -XGET localhost:4000/api/dk/lease/locations/postal_district -d '{ "postal_districts":["1000","1500"], "kinds":["store","office"]}'
 curl -XGET "localhost:4000/api/dk/lease/locations/postal_district?postal_districts\[\]=2850&kinds\[\]=warehouse"
+
+curl -XGET "localhost:4000/api/dk/lease/locations/area_slug/sydjylland?kinds\[\]=warehouse"
+curl -XGET "localhost:4000/api/dk/lease/locations/postal_district_slug/2600-glostrup?kinds\[\]=warehouse"
 ```
 
 To start your new Phoenix application:
