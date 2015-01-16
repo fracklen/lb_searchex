@@ -33,9 +33,9 @@ defmodule LbSearchex.LocationController do
     json allow_cors(conn), locations
   end
 
-  defp parse_request(req_type, "POST", _body, params), do: query(req_type, params)
-  defp parse_request(req_type, "GET","", params), do: query(req_type, params)
-  defp parse_request(req_type, "GET", body, params) do
+  defp parse_request(req_type, "POST", _,    params), do: query(req_type, params)
+  defp parse_request(req_type, "GET",  "",   params), do: query(req_type, params)
+  defp parse_request(req_type, "GET",  body, params) do
     request = Map.merge(Poison.decode!(body), params)
     req_type |> query(request)
   end
@@ -76,5 +76,4 @@ defmodule LbSearchex.LocationController do
   defp default_kinds, do: [:office, :store, :warehouse]
 
   defp allow_cors(conn), do: put_resp_header(conn, "Access-Control-Allow-Origin", "*")
-
 end

@@ -11,9 +11,8 @@ defmodule LbSearchex.Router do
   end
 
   scope "/", LbSearchex do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
-    get "/", PageController, :index
     get "/health_check", HealthController, :index
   end
 
