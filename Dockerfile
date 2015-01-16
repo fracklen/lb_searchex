@@ -9,9 +9,9 @@ WORKDIR /var/www/app
 
 ADD build.tar /var/www/app/
 
-RUN yes | mix deps.get \
-    mix deps.compile \
-    mix compile.protocols \
+RUN yes | mix deps.get    && \
+    mix deps.compile      && \
+    mix compile.protocols && \
     mix release
 
 CMD ["rel/lb_searchex/bin/lb_searchex", "foreground"]
