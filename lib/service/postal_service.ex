@@ -8,7 +8,7 @@ defmodule PostalService do
   end
 
   defp group_by_area(areas) do
-  	{_, groups} = Enum.map_reduce(areas, %{}, fn(area, map)->{0, Map.put(map, area.id, area) } end)
+  	{_, groups} = Enum.map_reduce(areas, %{}, fn(area, map)->{0, Map.put(map, area.slug, area) } end)
   	groups
   end
 
