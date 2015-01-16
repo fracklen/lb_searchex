@@ -5,28 +5,31 @@ defmodule LbSearchex.HealthController do
 
   def index(conn, params) do
     response = %{ responses: ping_all }
-    |> create_response
+      |> create_response
 
     conn
-    |> put_status(response.status)
-    |> json(response)
+      |> put_status(response.status)
+      |> json(response)
   end
 
   defp ping_all do
-    Postalex.Server.ping |> Enum.map fn(res)->to_map(res) end
+    Postalex.Server.ping
+      |> Enum.map &(to_map(&1))
   end
 
   defp create_response(%{ responses: responses }) do
     error_code(errors?(responses), responses)
-    |> Map.put(:responses, responses)
+      |> Map.put(:responses, responses)
   end
 
-  defp error_code(true, responses), do: %{ error: "ping errors", status: 500 }
-  defp error_code(false, responses), do: %{ ok: "all ok", status: 200 }
-  defp errors?(responses), do: Enum.any?(responses, fn(x) -> error?(x) end)
+  defp error_code(true,  responses), do: %{ error: "ping errors", status: 500 }
+  defp error_code(false, responses), do: %{ ok:    "all ok"     , status: 200 }
+
+  defp errors?(responses), do: Enum.any?(responses, &(error?(&1)))
+
   defp error?(%{error: _}), do: true
-  defp error?(%{ok: _}), do: false
+  defp error?(%{ok:    _}), do: false
 
   defp to_map({:error, msg}), do: %{error: msg}
-  defp to_map({:ok, msg}), do: %{ok: msg}
+  defp to_map({:ok,    msg}), do: %{ok:    msg}
 end

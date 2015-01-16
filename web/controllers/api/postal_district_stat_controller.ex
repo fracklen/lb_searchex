@@ -13,5 +13,4 @@ defmodule LbSearchex.PostalDistrictStatController do
   end
 
   defp allow_cors(conn), do: put_resp_header(conn, "Access-Control-Allow-Origin", "*")
-
 end

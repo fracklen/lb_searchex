@@ -26,5 +26,4 @@ defmodule LocationService do
     ctry_cat = %{ country: atomize(country), category: atomize(category) }
     Postalex.Server.locations(ctry_cat, kinds: kinds, postal_district_slug: postal_district_slug)
   end
-
 end
