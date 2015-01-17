@@ -2,9 +2,9 @@ defmodule PostalService do
   alias Postalex.Server
   import ServiceHelper
 
-  def area_stats(country, category, group) do
-    ctry_cat = %{ country: atomize(country), category: atomize(category) }
-    Postalex.Server.areas(ctry_cat, atomize(group))
+  def area_stats(group, country, category) do
+    ctry_cat(country, category)
+      |> Postalex.Server.areas(atomize(group))
       |> group_by_area
   end
 
