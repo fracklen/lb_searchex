@@ -18,6 +18,6 @@
   "phoenix": {:hex, :phoenix, "0.7.2"},
   "plug": {:hex, :plug, "0.9.0"},
   "poison": {:hex, :poison, "1.3.0"},
-  "postalex": {:git, "git://github.com/ringling/postalex.git", "cb973e15198e1cf0ba08cf21b1e6f6d789b513fa", [tag: "v0.1.2"]},
+  "postalex": {:git, "git://github.com/ringling/postalex.git", "825b74866bacf29e5ba118856354750a95b95203", [tag: "v0.1.3"]},
   "ranch": {:hex, :ranch, "1.0.0"},
   "ssl_verify_hostname": {:git, "https://github.com/benoitc/ssl_verify_hostname", "3e7179789603057e3ec1867802c74c7bf6f8528a", [tag: "1.0.0"]}}

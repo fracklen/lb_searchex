@@ -41,19 +41,27 @@ defmodule LbSearchex.LocationController do
   end
 
   defp query(:default, request) do
-    {request["country"], request["category"], kinds(request["kinds"])}
+    category = request["category"]
+    kinds = request["kinds"] |> fetch_kinds(category)
+    {request["country"], category, kinds}
   end
 
   defp query(:postal_district, request) do
-    {request["country"], request["category"], request["postal_districts"], kinds(request["kinds"])}
+    category = request["category"]
+    kinds = request["kinds"] |> fetch_kinds(category)
+    {request["country"], category, request["postal_districts"], kinds}
   end
 
   defp query(:bounding_box, request) do
-    {request["country"], request["category"], bounding_box(request), kinds(request["kinds"])}
+    category = request["category"]
+    kinds = request["kinds"] |> fetch_kinds(category)
+    {request["country"], category, bounding_box(request), kinds}
   end
 
   defp query(:postal_code, request) do
-    {request["country"], request["category"], request["postal_code"], kinds(request["kinds"])}
+    category = request["category"]
+    kinds = request["kinds"] |> fetch_kinds(category)
+    {request["country"], category, request["postal_code"], kinds}
   end
 
   defp bounding_box(request) do
@@ -64,9 +72,9 @@ defmodule LbSearchex.LocationController do
     }
   end
 
-  defp kinds(nil, category),  do: default_kinds(category)
-  defp kinds([], category),   do: default_kinds(category)
-  defp kinds(kinds),          do: kinds
+  defp fetch_kinds(nil, category),  do: default_kinds(category)
+  defp fetch_kinds([], category),   do: default_kinds(category)
+  defp fetch_kinds(kinds, _),       do: kinds
 
   defp fetch_body(conn) do
     {:ok, body, _} = Plug.Conn.read_body(conn)
