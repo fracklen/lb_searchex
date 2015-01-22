@@ -3,17 +3,17 @@ defmodule LbSearchex.LocationController do
 
   plug :action
 
-    def area_slug(conn, params) do
-      {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
-      locations = LocationService.find_by_area_slug(country, category, kinds, params["area_slug"])
-      json allow_cors(conn), locations
-    end
+  def area_slug(conn, params) do
+    {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
+    locations = LocationService.find_by_area_slug(country, category, kinds, params["area_slug"])
+    json allow_cors(conn), locations
+  end
 
-    def postal_district_slug(conn, params) do
-      {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
-      locations = LocationService.find_by_postal_district_slug(country, category, kinds, params["postal_district_slug"])
-      json allow_cors(conn), locations
-    end
+  def postal_district_slug(conn, params) do
+    {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
+    locations = LocationService.find_by_postal_district_slug(country, category, kinds, params["postal_district_slug"])
+    json allow_cors(conn), locations
+  end
 
   def bounding_box(conn, params) do
     {country, category, bounding_box, kinds} = parse_request(:bounding_box, conn.method, fetch_body(conn), params)
@@ -64,16 +64,19 @@ defmodule LbSearchex.LocationController do
     }
   end
 
-  defp kinds(nil), do: default_kinds
-  defp kinds([]), do: default_kinds
-  defp kinds(kinds), do: kinds
+  defp kinds(nil, category),  do: default_kinds(category)
+  defp kinds([], category),   do: default_kinds(category)
+  defp kinds(kinds),          do: kinds
 
   defp fetch_body(conn) do
     {:ok, body, _} = Plug.Conn.read_body(conn)
     body
   end
 
-  defp default_kinds, do: [:office, :store, :warehouse]
+  defp default_kinds("lease"),      do: [:office, :store, :warehouse]
+  defp default_kinds("user"),       do: default_kinds("lease")
+  defp default_kinds("investment"), do: [:office, :store, :warehouse, :housing]
+  defp default_kinds(_),            do: default_kinds("lease")
 
   defp allow_cors(conn), do: put_resp_header(conn, "Access-Control-Allow-Origin", "*")
 end

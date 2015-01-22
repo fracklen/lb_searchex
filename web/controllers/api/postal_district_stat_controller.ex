@@ -4,7 +4,7 @@ defmodule LbSearchex.PostalDistrictStatController do
   plug :action
 
   def index(conn, params) do
-    pd_stats = PostalService.area_stats(params["country"], params["category"], :by_district)
+    pd_stats = PostalService.area_stats(:by_district, params["country"], params["category"])
     json allow_cors(conn), pd_stats
   end
 
