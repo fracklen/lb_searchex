@@ -1,7 +1,8 @@
-%{"con_cache": {:hex, :con_cache, "0.6.1"},
+%{"benchwarmer": {:hex, :benchwarmer, "0.0.2"},
+  "con_cache": {:hex, :con_cache, "0.6.1"},
   "conform": {:hex, :conform, "0.11.0"},
   "couchbeam": {:git, "git://github.com/benoitc/couchbeam.git", "a20517d415486dea4185781483361e0188289d85", [tag: "1.1.6"]},
-  "couchex": {:git, "git://github.com/ringling/couchex.git", "781c6fcc7f005a19d50e5d1ff6ba6e867bf3af48", []},
+  "couchex": {:git, "git://github.com/ringling/couchex.git", "85b399ff0f0c689242c625bcecf2779c2090ce6d", [tag: "v0.1"]},
   "cowboy": {:hex, :cowboy, "1.0.0"},
   "cowlib": {:hex, :cowlib, "1.0.1"},
   "dotenv": {:hex, :dotenv, "0.0.4"},
@@ -18,6 +19,6 @@
   "phoenix": {:hex, :phoenix, "0.7.2"},
   "plug": {:hex, :plug, "0.9.0"},
   "poison": {:hex, :poison, "1.3.0"},
-  "postalex": {:git, "git://github.com/ringling/postalex.git", "825b74866bacf29e5ba118856354750a95b95203", [tag: "v0.1.3"]},
+  "postalex": {:git, "git://github.com/lokalebasen/postalex.git", "ed6620fda21b2cde60368188442020878b507fc3", [tag: "v0.1.5"]},
   "ranch": {:hex, :ranch, "1.0.0"},
   "ssl_verify_hostname": {:git, "https://github.com/benoitc/ssl_verify_hostname", "3e7179789603057e3ec1867802c74c7bf6f8528a", [tag: "1.0.0"]}}

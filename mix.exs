@@ -21,7 +21,7 @@ defmodule LbSearchex.Mixfile do
       {:poison, "~> 1.2", [optional: false, hex: :poison, override: true]},
       {:cowboy, "~> 1.0"},
       {:exrm, "~> 0.14.16"},
-      {:postalex, github: "ringling/postalex", tag: "v0.1.4"}
+      {:postalex, github: "lokalebasen/postalex", tag: "v0.1.5"}
     ]
   end
 end
