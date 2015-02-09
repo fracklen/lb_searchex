@@ -1,5 +1,4 @@
 defmodule PostalService do
-  alias Postalex.Server
   import ServiceHelper
 
   def area_stats(group, country, category) do
