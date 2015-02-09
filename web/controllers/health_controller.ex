@@ -3,8 +3,8 @@ defmodule LbSearchex.HealthController do
 
   plug :action
 
-  def index(conn, params) do
-    response = %{ responses: ping_all }
+  def index(conn, _) do
+    response = %{responses: ping_all}
       |> create_response
 
     conn
@@ -18,12 +18,12 @@ defmodule LbSearchex.HealthController do
   end
 
   defp create_response(%{ responses: responses }) do
-    error_code(errors?(responses), responses)
+    error_code(errors?(responses))
       |> Map.put(:responses, responses)
   end
 
-  defp error_code(true,  responses), do: %{ error: "ping errors", status: 500 }
-  defp error_code(false, responses), do: %{ ok:    "all ok"     , status: 200 }
+  defp error_code(true),  do: %{error: "ping errors", status: 500}
+  defp error_code(false), do: %{ok:    "all ok"     , status: 200}
 
   defp errors?(responses), do: Enum.any?(responses, &(error?(&1)))
 
