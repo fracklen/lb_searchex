@@ -1,5 +1,4 @@
 defmodule LocationService do
-  alias Postalex.Server
   import ServiceHelper
 
   def find(country, category, kinds, postal_districts) do
