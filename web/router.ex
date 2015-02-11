@@ -32,6 +32,7 @@ defmodule LbSearchex.Router do
     end
 
     scope "/stats" do
+      get "/", StatController, :show
       get "/areas", AreaStatController, :index
       get "/postal_districts", PostalDistrictStatController, :index
       get "/postal_codes", PostalDistrictStatController, :postal_codes
