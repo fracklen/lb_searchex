@@ -16,6 +16,10 @@ defmodule LbSearchex.Router do
     get "/health_check", HealthController, :index
   end
 
+  scope "/api/:country", LbSearchex do
+    get "/postal_codes/:postal_code/postal_district", PostalCodeController, :postal_district
+  end
+
   scope "/api/:country/:category", LbSearchex do
     pipe_through :api
 
