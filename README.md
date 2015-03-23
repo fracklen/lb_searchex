@@ -1,8 +1,27 @@
 # LbSearchex
 
+LbSearchex is the service for searching through locations
 
+## Usage
+
+Install dependencies using:
+
+```elixir
+mix deps.get
+```
+
+Start app with:
+
+```elixir
+iex -S mix
+```
+
+The app starts by default at `localhost:4000`
+
+## Endpoint examples
 
 `curl localhost:4000/api/dk/lease/stats/postal_districts`
+
 ```
 curl -XGET "localhost:4000/api/dk/lease/locations/postal_district?postal_districts\[\]=2000"
 curl -XPOST localhost:4000/api/dk/lease/locations/postal_district -d '{ "postal_districts":["2850"]}'
@@ -15,14 +34,7 @@ curl -XGET "localhost:4000/api/dk/lease/locations/area_slug/sydjylland?kinds\[\]
 curl -XGET "localhost:4000/api/dk/lease/locations/postal_district_slug/2600-glostrup?kinds\[\]=warehouse"
 ```
 
-To start your new Phoenix application:
-
-1. Install dependencies with `mix deps.get`
-2. Start Phoenix endpoint with `mix phoenix.start`
-
-Now you can visit `localhost:4000` from your browser.
-
-## Test deploy
+## Test Deploy
 ```
 mix release
 scp rel/lb_searchex/lb_searchex-0.0.1.tar.gz <user>@cm.local.lokalebasen.dk:/home/<user>/releases
