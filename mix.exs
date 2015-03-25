@@ -2,18 +2,26 @@ defmodule LbSearchex.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :lb_searchex,
-     version: "0.0.2",
-     elixir: "~> 1.0",
-     elixirc_paths: ["lib", "web"],
-     compilers: [:phoenix] ++ Mix.compilers,
-     deps: deps]
+    [
+      app: :lb_searchex,
+      version: "0.0.2",
+      elixir: "~> 1.0",
+      elixirc_paths: ["lib", "web"],
+      compilers: [:phoenix] ++ Mix.compilers,
+      deps: deps
+    ]
   end
 
   def application do
-    [mod: {LbSearchex, []},
-     applications: [:phoenix, :cowboy, :logger, :postalex, :dotenv, :jsx, :couchbeam]]
+    [
+      mod: {LbSearchex, []},
+      applications: app_list(Mix.env)
+    ]
   end
+
+  defp app_list(:dev), do: [:dotenv | app_list]
+  defp app_list(_), do: app_list
+  defp app_list, do: [:phoenix, :cowboy, :logger, :postalex, :jsx, :couchbeam]
 
   defp deps do
     [
