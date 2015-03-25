@@ -20,8 +20,9 @@ defmodule LbSearchex.Mixfile do
       {:phoenix, "~> 0.7.2"},
       {:poison, "~> 1.2", [optional: false, hex: :poison, override: true]},
       {:cowboy, "~> 1.0"},
+      {:con_cache, "~> 0.6.0"},
       {:exrm, "~> 0.14.16"},
-      {:postalex, github: "lokalebasen/postalex", tag: "v0.1.10"}
+      {:postalex, github: "lokalebasen/postalex", tag: "v0.1.12"}
     ]
   end
 end
