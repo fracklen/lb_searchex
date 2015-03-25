@@ -22,7 +22,7 @@ defmodule LbSearchex.Mixfile do
       {:cowboy, "~> 1.0"},
       {:con_cache, "~> 0.6.0"},
       {:exrm, "~> 0.14.16"},
-      {:postalex, github: "lokalebasen/postalex", tag: "v0.1.12"}
+      {:postalex, github: "lokalebasen/postalex", tag: "v0.1.14"}
     ]
   end
 end
