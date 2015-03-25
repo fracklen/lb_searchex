@@ -11,7 +11,6 @@ ADD build.tar /var/www/app/
 
 RUN yes | mix deps.get    && \
     mix deps.compile      && \
-    mix compile.protocols && \
-    mix release
+    mix compile.protocols
 
-CMD ["rel/lb_searchex/bin/lb_searchex", "foreground"]
+CMD ["mix", "run", "--no-halt"]
