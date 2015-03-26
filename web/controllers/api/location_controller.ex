@@ -5,31 +5,31 @@ defmodule LbSearchex.LocationController do
 
   def area_slug(conn, params) do
     {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
-    locations = LocationService.find_by_area_slug(country, category, kinds, params["area_slug"], params["sort"])
+    locations = LocationService.find_by_area_slug(country, category, kinds, params["area_slug"])
     json allow_cors(conn), locations
   end
 
   def postal_district_slug(conn, params) do
     {country, category, kinds} = parse_request(:default, conn.method, fetch_body(conn), params)
-    locations = LocationService.find_by_postal_district_slug(country, category, kinds, params["postal_district_slug"], params["sort"])
+    locations = LocationService.find_by_postal_district_slug(country, category, kinds, params["postal_district_slug"])
     json allow_cors(conn), locations
   end
 
   def bounding_box(conn, params) do
     {country, category, bounding_box, kinds} = parse_request(:bounding_box, conn.method, fetch_body(conn), params)
-    locations = LocationService.by_bounding_box(country, category, kinds, bounding_box, params["sort"])
+    locations = LocationService.by_bounding_box(country, category, kinds, bounding_box)
     json allow_cors(conn), locations
   end
 
   def postal_district(conn, params) do
     {country, category, postal_districts, kinds} = parse_request(:postal_district, conn.method, fetch_body(conn), params)
-    locations = LocationService.find(country, category, kinds, postal_districts, params["sort"])
+    locations = LocationService.find(country, category, kinds, postal_districts)
     json allow_cors(conn), locations
   end
 
   def district_by_code(conn, params) do
     {country, category, postal_code, kinds} = parse_request(:postal_code, conn.method, fetch_body(conn), params)
-    locations = LocationService.district_locations_by_postal_code(country, category, kinds, postal_code, params["sort"])
+    locations = LocationService.district_locations_by_postal_code(country, category, kinds, postal_code)
     json allow_cors(conn), locations
   end
 
