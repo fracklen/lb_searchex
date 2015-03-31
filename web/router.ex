@@ -18,6 +18,7 @@ defmodule LbSearchex.Router do
 
   scope "/api/:country", LbSearchex do
     get "/postal_codes/:postal_code/postal_district", PostalCodeController, :postal_district
+    get "/postal_districts/:pd_slug", PostalDistrictController, :show
   end
 
   scope "/api/:country/:category", LbSearchex do
