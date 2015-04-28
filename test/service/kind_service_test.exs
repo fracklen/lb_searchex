@@ -3,10 +3,10 @@ defmodule KindServiceTest do
 
   defmodule PostalServiceStub do
 
-    def area_stats(:by_area, country, category) do
+    def area_stats(:by_area, _country, _category) do
         %{
           "sydsjaelland" => %{
-            id: "sydsj", 
+            id: "sydsj",
             name: "Sydsjælland",
             slug: "sydsjaelland",
             sums: %{"office" => 53, "store" => 40, "warehouse" => 36}
