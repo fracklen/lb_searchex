@@ -15,6 +15,13 @@ defmodule LbSearchex.PostalDistrictController do
     |> postal_district_response(conn)
   end
 
+  def index(conn, params) do
+    params["country"]
+    |> String.to_atom
+    |> Postalex.Service.PostalDistrict.all_with_postal_codes
+    |> postal_district_response(conn)
+  end
+
   defp postal_district_response(nil, conn), do: respond_404(conn)
   defp postal_district_response(postal_district, conn) do
     conn |> json(postal_district)
