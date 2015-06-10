@@ -23,9 +23,7 @@ defmodule LbSearchex.PostalCodeController do
 
   defp format_result(result) do
     result
-    |> Map.delete(:postal_district_id)
-    |> Map.delete(:postal_name)
-    |> Map.delete(:type)
+    |> Map.drop([:postal_district_id, :type, :postal_name])
     |> Enum.into %{id: result.postal_district_id, name: result.postal_name}
   end
 
