@@ -9,24 +9,16 @@ defmodule LbSearchex.PostalCodeController do
     |> pd_response(conn)
   end
 
-  defp pd_response(%{postal_district_id: _} = result, conn) do
+  defp pd_response(%{postal_district_id: id, number: number, name: name}, conn) do
     conn
     |> allow_cors
-    |> json(format_result(result))
+    |> json %{id: id, postal_code: number, name: name}
   end
   defp pd_response(_, conn) do
     conn
     |> put_status(404)
     |> allow_cors
     |> json %{error: :not_found}
-  end
-
-  defp format_result(result) do
-    result
-    |> Map.delete(:postal_district_id)
-    |> Map.delete(:postal_name)
-    |> Map.delete(:type)
-    |> Enum.into %{id: result.postal_district_id, name: result.postal_name}
   end
 
   defp allow_cors(conn), do: put_resp_header(conn, "Access-Control-Allow-Origin", "*")
