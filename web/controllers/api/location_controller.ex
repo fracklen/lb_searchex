@@ -81,9 +81,9 @@ defmodule LbSearchex.LocationController do
     body
   end
 
-  defp default_kinds("lease"),      do: [:office, :store, :warehouse]
+  defp default_kinds("lease"),      do: [:office, :store, :warehouse, :business_center]
   defp default_kinds("user"),       do: default_kinds("lease")
-  defp default_kinds("investment"), do: [:office, :store, :warehouse, :housing]
+  defp default_kinds("investment"), do: [:office, :store, :warehouse, :housing, :business_center]
   defp default_kinds(_),            do: default_kinds("lease")
 
   defp allow_cors(conn), do: put_resp_header(conn, "Access-Control-Allow-Origin", "*")
